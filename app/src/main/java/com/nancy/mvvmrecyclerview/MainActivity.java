@@ -10,6 +10,7 @@ import com.nancy.mvvmrecyclerview.Adapter.RecyclerViewAdapter;
 import com.nancy.mvvmrecyclerview.model.ListViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ListListener {
 
@@ -38,8 +39,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     public ArrayList<ListViewModel> getList(){
         ArrayList<ListViewModel> l=new ArrayList<>();
-   ListViewModel item=new ListViewModel("nancy","hi","12:00");
-   l.add(item);
+        ListViewModel l1=new ListViewModel();
+        l1.time.set("12:00");
+        l1.setText("Hi");
+        l1.setName("Nancy");
+//   ListViewModel item=new ListViewModel("nancy","hi", l1);
+   l.add(l1);
    return l;
 
     }
