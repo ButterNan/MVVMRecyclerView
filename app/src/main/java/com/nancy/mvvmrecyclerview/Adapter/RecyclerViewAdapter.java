@@ -1,5 +1,7 @@
 package com.nancy.mvvmrecyclerview.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 
 
 import com.nancy.mvvmrecyclerview.R;
+import com.nancy.mvvmrecyclerview.SecondActivity;
 import com.nancy.mvvmrecyclerview.databinding.ListRowBinding;
 import com.nancy.mvvmrecyclerview.model.ListViewModel;
 
@@ -21,7 +24,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.binding.setList(itemList.get(position));
+        //holder.binding.setList(itemList.get(position));
+        holder.bind(itemList.get(position));
+
                 //setListViewModel(itemList.get(position));
 
 
@@ -33,9 +38,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
-    public RecyclerViewAdapter(List<ListViewModel> postList) {
+    public RecyclerViewAdapter(List<ListViewModel> postList, ListListener listener) {
         this.itemList = postList;
-        //this.listener = listener;
+        this.listener = listener;
     }
 
 
@@ -48,23 +53,47 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
         ListRowBinding binding = ListRowBinding.inflate(layoutInflater,parent,false);
                // DataBindingUtil.inflate(layoutInflater, viewType, parent, false);
-        return new RecyclerViewHolder(binding);
+        return new RecyclerViewHolder(binding,listener);
     }
 
-    class RecyclerViewHolder extends RecyclerView.ViewHolder{
+    class RecyclerViewHolder extends RecyclerView.ViewHolder {
         public RecyclerViewHolder(View itemView) {
             super(itemView);
         }
 
         private ListRowBinding binding;
-        public RecyclerViewHolder(final ListRowBinding itemBinding) {
+        private ListListener listener;
+        Context context;
+        public RecyclerViewHolder(final ListRowBinding itemBinding, final ListListener listener) {
             super(itemBinding.getRoot());
            this.binding = itemBinding;
+           this.listener=listener;
+           context=binding.getRoot().getContext();
+           binding.getRoot().setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+
+                   listener.onRowClicked(view,getAdapterPosition());
+               }
+           });
         }
+
+        public void bind(ListViewModel list) {
+             binding.setList(list);
+//            binding.setVariable(BR.text, obj);
+
+
+            binding.executePendingBindings();
+
+
+
+        }
+
+
     }
 
     public interface ListListener {
-        void onRowClicked(ListViewModel post);
+        void onRowClicked(View v,int position);
     }
 }
 

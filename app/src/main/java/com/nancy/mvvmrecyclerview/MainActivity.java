@@ -1,10 +1,12 @@
 package com.nancy.mvvmrecyclerview;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.nancy.mvvmrecyclerview.Adapter.RecyclerViewAdapter;
 import com.nancy.mvvmrecyclerview.model.ListViewModel;
@@ -12,17 +14,15 @@ import com.nancy.mvvmrecyclerview.model.ListViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ListListener {
+public class MainActivity extends AppCompatActivity  {
 
     private RecyclerViewAdapter mAdapter;
     private RecyclerView recyclerView;
     //private ListItemBinding binding;
     private ListViewModel user;
+    private RecyclerViewAdapter.ListListener listener;
 
-    @Override
-    public void onRowClicked(ListViewModel post) {
 
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,22 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        mAdapter = new RecyclerViewAdapter(getList());
+
+        listener = new RecyclerViewAdapter.ListListener() {
+            @Override
+            public void onRowClicked(View v, int position) {
+
+                Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+                startActivity(intent);
+
+
+
+            }
+        };
+
+        mAdapter = new RecyclerViewAdapter(getList(), listener);
+
+
         recyclerView.setAdapter(mAdapter);
     }
 
