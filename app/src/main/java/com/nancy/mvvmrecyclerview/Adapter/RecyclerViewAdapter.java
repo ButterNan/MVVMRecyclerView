@@ -69,6 +69,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
            this.binding = itemBinding;
            this.listener=listener;
            context=binding.getRoot().getContext();
+
+           binding.button.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   listener.onButtonClick(view,getAdapterPosition());
+               }
+           });
+
+           //binding.getHandlers().onFabClicked(view);
+
            binding.getRoot().setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
@@ -94,6 +104,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public interface ListListener {
         void onRowClicked(View v,int position);
+        void onButtonClick(View v,int position);
     }
 }
 

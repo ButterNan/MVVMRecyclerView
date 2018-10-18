@@ -1,5 +1,6 @@
 package com.nancy.mvvmrecyclerview;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,11 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        Intent n=getIntent();
+        Bundle bu = n.getExtras();
+        String name = bu.getString("Name");
+        //Bundle b= savedInstanceState;
+
         binding = DataBindingUtil.setContentView(this,R.layout.activity_second);
 
         ListViewModel list = new ListViewModel();
@@ -21,5 +27,9 @@ public class SecondActivity extends AppCompatActivity {
         list.setText("Hi");
 
         binding.setList(list);
+
+
+
+
     }
 }

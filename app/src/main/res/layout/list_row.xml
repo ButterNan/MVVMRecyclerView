@@ -7,6 +7,16 @@
         <variable
             name="list"
             type="com.nancy.mvvmrecyclerview.model.ListViewModel" />
+
+        <!--<variable-->
+        <!--name="handlers"-->
+        <!--type="com.nancy.mvvmrecyclerview.Adapter.RecyclerViewAdapter.ListListener" />-->
+
+        <!--<variable-->
+            <!--name="handle"-->
+            <!--type="com.nancy.mvvmrecyclerview.MainActivity.MyClickHandlers" />-->
+
+
     </data>
 
 
@@ -67,6 +77,14 @@
                 android:layout_gravity="top|right"
                 android:textColor="#727272"
                 android:textSize="14dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                android:id="@+id/button" />
+                <!--android:onClick="@{handle::onButtonClicked"-->
+
 
 
         </LinearLayout>
