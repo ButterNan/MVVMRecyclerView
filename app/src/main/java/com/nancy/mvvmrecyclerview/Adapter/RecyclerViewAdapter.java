@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.nancy.mvvmrecyclerview.MainActivity;
 import com.nancy.mvvmrecyclerview.R;
 import com.nancy.mvvmrecyclerview.SecondActivity;
 import com.nancy.mvvmrecyclerview.databinding.ListRowBinding;
@@ -21,11 +22,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<ListViewModel> itemList;
     private LayoutInflater layoutInflater;
     private ListListener listener;
+    MainActivity.MyClickHandlers click;
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         //holder.binding.setList(itemList.get(position));
         holder.bind(itemList.get(position));
+
 
                 //setListViewModel(itemList.get(position));
 
@@ -38,9 +41,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
-    public RecyclerViewAdapter(List<ListViewModel> postList, ListListener listener) {
+    public RecyclerViewAdapter(List<ListViewModel> postList, ListListener listener, MainActivity.MyClickHandlers click) {
         this.itemList = postList;
         this.listener = listener;
+        this.click = click;
     }
 
 
@@ -86,12 +90,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                    listener.onRowClicked(view,getAdapterPosition());
                }
            });
+
+           binding.setHandle(click);
         }
 
         public void bind(ListViewModel list) {
              binding.setList(list);
 //            binding.setVariable(BR.text, obj);
-
+            //binding.setHandle(click);
 
             binding.executePendingBindings();
 

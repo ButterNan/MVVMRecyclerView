@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity  {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
+
+        MyClickHandlers click = new MyClickHandlers(getApplicationContext());
         listener = new RecyclerViewAdapter.ListListener() {
             @Override
             public void onRowClicked(View v, int position) {
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity  {
             }
         };
 
-        mAdapter = new RecyclerViewAdapter(getList(), listener);
+        mAdapter = new RecyclerViewAdapter(getList(), listener, click);
 
 
 
@@ -81,16 +83,16 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-//    public class MyClickHandlers {
-//
-//        Context context;
-//
-//        public MyClickHandlers(Context context) {
-//            this.context = context;
-//        }
-//
-//        public void onButtonClicked(View view) {
-//            Toast.makeText(context, "Posts is clicked!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    public class MyClickHandlers {
+
+        Context context;
+
+        public MyClickHandlers(Context context) {
+            this.context = context;
+        }
+
+        public void onButtonClicked(View view) {
+            Toast.makeText(context, "Posts is clicked!", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

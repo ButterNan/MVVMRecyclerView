@@ -12,9 +12,9 @@
         <!--name="handlers"-->
         <!--type="com.nancy.mvvmrecyclerview.Adapter.RecyclerViewAdapter.ListListener" />-->
 
-        <!--<variable-->
-            <!--name="handle"-->
-            <!--type="com.nancy.mvvmrecyclerview.MainActivity.MyClickHandlers" />-->
+        <variable
+            name="handle"
+            type="com.nancy.mvvmrecyclerview.MainActivity.MyClickHandlers" />
 
 
     </data>
@@ -84,6 +84,14 @@
                 android:text="Button"
                 android:id="@+id/button" />
                 <!--android:onClick="@{handle::onButtonClicked"-->
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button handler"
+                android:id="@+id/buttonHandler"
+                android:onClick="@{handle::onButtonClicked}"/>
+
 
 
 
